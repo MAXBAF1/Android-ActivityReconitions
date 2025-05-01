@@ -224,9 +224,7 @@ fun StatusScreen(
     }
 
     Scaffold(
-        topBar = {
-            CustomCardTopAppBar(currentActivity, activityChangeTime)
-        },
+        topBar = { CustomCardTopAppBar(currentActivity, activityChangeTime) },
         content = { padding ->
             Box(
                 modifier = Modifier
@@ -252,9 +250,7 @@ fun CustomCardTopAppBar(status: String, activityChangeTime: String) {
             .fillMaxWidth()
             .height(147.dp),
         shape = RectangleShape,
-        colors = CardDefaults.cardColors(
-            containerColor = topcolor
-        ),
+        colors = CardDefaults.cardColors(containerColor = topcolor),
     ) {
         Box(
             modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
@@ -273,13 +269,15 @@ fun CustomCardTopAppBar(status: String, activityChangeTime: String) {
                     style = MaterialTheme.typography.headlineSmall.copy(
                         fontSize = 24.sp, fontWeight = FontWeight.Bold
                     ),
-                    color = Black
+                    color = Black,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = activityChangeTime, style = MaterialTheme.typography.bodySmall.copy(
+                    text = activityChangeTime,
+                    style = MaterialTheme.typography.bodySmall.copy(
                         fontSize = 20.sp
-                    ), color = gray
+                    ),
+                    color = gray,
                 )
             }
         }

@@ -6,8 +6,6 @@ import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.example.first.ActivityTransitionData.TRANSITIONS_EXTRA
-import com.example.first.ActivityTransitionData.TRANSITIONS_RECEIVER_ACTION
 import com.google.android.gms.location.ActivityTransition
 import com.google.android.gms.location.ActivityTransitionEvent
 import com.google.android.gms.location.ActivityTransitionResult
@@ -18,7 +16,7 @@ class ActivityTransitionsReceiver : BroadcastReceiver() {
         Log.d("ActivityTransitionReceiver", "Transition Event Received")
 
         when (intent.action) {
-            TRANSITIONS_RECEIVER_ACTION -> {
+            ActivityTransitionData.TRANSITIONS_RECEIVER_ACTION -> {
                 if (ActivityTransitionResult.hasResult(intent)) {
                     val result: ActivityTransitionResult = ActivityTransitionResult.extractResult(intent) ?: return
 
@@ -28,9 +26,9 @@ class ActivityTransitionsReceiver : BroadcastReceiver() {
                         sendTransitionInfo(transitionInfo, context)
 
                         val serviceIntent = Intent(context, ActivityTransitionService::class.java).apply {
-                            action = TRANSITIONS_EXTRA
+                            action = ActivityTransitionData.TRANSITIONS_EXTRA
                             putExtra(
-                                TRANSITIONS_EXTRA,
+                                ActivityTransitionData.TRANSITIONS_EXTRA,
                                 transitionInfo
                             )
                         }
@@ -52,7 +50,7 @@ class ActivityTransitionsReceiver : BroadcastReceiver() {
 
     private fun sendTransitionInfo(transitionInfo: String, context: Context) {
         val intent = Intent(context, MainActivity::class.java)
-        intent.putExtra(TRANSITIONS_EXTRA, transitionInfo)
+        intent.putExtra(ActivityTransitionData.TRANSITIONS_EXTRA, transitionInfo)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         context.startActivity(intent)
     }
